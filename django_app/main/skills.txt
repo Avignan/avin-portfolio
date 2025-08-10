@@ -1,0 +1,13 @@
+Python,python.png
+Django
+Flask
+FastAPI
+SQL,sql-server.png
+Data Analysis,excel.png
+Data Visualization,visualisation.png
+Problem Solver
+AI Tools,artificial-intelligence.png
+AWS Cloud,web-hosting.png
+JavaScript,java-script.png
+HTML5,html-5.png
+CSS3,css-3.png

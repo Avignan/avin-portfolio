@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ContactMe - Portfolio</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <style>
+    .from{
+        margin-left: 100px;
+
+    }
+
+    label {
+      display: block;
+      text-align: left;
+      margin-bottom: 6px;
+      font-weight: 500;
+      color: #fff;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px 12px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+      transition: border 0.3s;
+    }
+
+    input[type="text"]:focus {
+      border-color: #ffd700; /* Indigo */
+      outline: none;
+    }
+
+    button[type="submit"] {
+      width: 100%;
+      padding: 12px;
+      background-color: #ffd900cb;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #ffd700;
+    }
+    </style>
+
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <ul>
+                <li><a href="/" class="nav-btn">Home</a></li>
+                <li><a href="/about/" class="nav-btn">About Me</a></li>
+                <li><a href="/skills/" class="nav-btn">Skills</a></li>
+                <li><a href="/certificates/" class="nav-btn">Certificates</a></li>
+                <li><a href="/projects/" class="nav-btn">Projects</a></li>
+                <li><a href="/contact/" class="nav-btn">Contact Me</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="main-center">
+        <div>
+            <h1 class="contact-title typewriter" id="contact-title"></h1>
+            <div class="contact-card">
+                <form id="contact_form" name="contact_form" method="post">
+                    <label for="name" id="name_label">Name:</label>
+                    <input type="text" id="name" class="name" name="name" placeholder="Enter Your Name Here" required/>
+                    <label for="email" id="from_email_label">From:</label>
+                    <input type="text" id="from_email" class="from_email" name="form_email" placeholder="Enter Your Email Here" required/>
+                    <label for="message" id="message_label">Message:</label>
+                    <input id="message" type="text" name="message" placeholder="Enter Your Message Here" required>
+                    
+                    <button id="submit" type="submit" name="submit">Send</button>
+                </form>
+            </div>
+            <p id="responseMsg"class="hidden"></p>
+            <div id="emailError" class="error"></div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2025 Avignan Nag</p>
+    </footer>
+    <script src="/static/javascript.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactTitle = document.getElementById('contact-title');
+            if (contactTitle) {
+                // Make the title visible for the typewriter effect
+                contactTitle.classList.add('visible');
+                typeWriter('contact-title', 'Get In Touch', true);
+            }
+
+            // Smooth page transition effect
+            document.querySelectorAll('.nav-btn').forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.body.style.transition = 'opacity 0.5s';
+                    document.body.style.opacity = '0';
+                    setTimeout(function() {
+                        window.location = link.href;
+                    }, 500);
+                });
+            });
+        });
+        
+            const form = document.getElementById('contact_form');
+            const emailInput = document.getElementById('from_email');
+            const emailError = document.getElementById('emailError');
+
+            function isValidEmail(email) {
+            // Basic email pattern
+            const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return pattern.test(email);
+            }
+
+            // Remove the conflicting form event listener - it's handled in javascript.js
+
+    </script>
+</body>
+</html>

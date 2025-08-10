@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Certificates - Portfolio</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <style>
+        #certificates-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 32px;
+            margin-top: 32px;
+        }
+        .certificate-item {
+            background: #272727;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+            padding: 24px 32px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 260px;
+            max-width: 340px;
+        }
+        .certificate-img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            margin-bottom: 12px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+        }
+        .certificate-item span {
+            font-size: 1.1em;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+        .certificate-item a {
+            color: #ffd700 !important;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <ul>
+                <li><a href="/" class="nav-btn">Home</a></li>
+                <li><a href="/about/" class="nav-btn">About Me</a></li>
+                <li><a href="/skills/" class="nav-btn active">Skills</a></li>
+                <li><a href="/certificates/" class="nav-btn">Certificates</a></li>
+                <li><a href="/projects/" class="nav-btn">Projects</a></li>
+                <li><a href="/contact/" class="nav-btn">Contact Me</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="skills-layout">
+        <h1 class="typewriter" id="certificate-title" style="color:#ffd700; margin-bottom:24px; text-align:left; letter-spacing:2px; position:absolute; top:40px; left:40px; z-index:2; font-family:'Libertinus Sans', Arial, sans-serif; white-space:nowrap; overflow:hidden; border-right:2px solid #ffd700;"></h1>
+        <div id="certificates-list">
+            {% for certificate in certificates %}
+                <div class="certificate-item">
+                    <img src="{{ certificate.image_link }}" alt="{{ certificate.name }}" class="certificate-img">
+                    <span>{{ certificate.name }}</span>
+                    <span><a href="{{ certificate.credential_url }}" style="color:#ffd700 !important; font-weight:500;">Verify</a></span>
+                </div>
+            {% endfor %}
+        </div>
+        {% if messages %}
+            {% for message in messages %}
+                <div>{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
+    </main>
+    <footer>
+        <p>&copy; 2025 Avignan Nag</p>
+    </footer>
+    <script src="/static/javascript.js"></script>
+</footer>
+    <script>
+    // Smooth page transition effect
+    document.querySelectorAll('.nav-btn').forEach(function(link) {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.body.style.transition = 'opacity 0.5s';
+            document.body.style.opacity = '0';
+            setTimeout(function() {
+                window.location = link.href;
+            }, 500);
+        });
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Skills - Portfolio</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <style>
+        /* #categories-containerID {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 32px;
+            margin-top: 32px;
+        } */
+        .categories-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 32px;
+            justify-content: center;
+            margin-top: 32px;
+        }
+        .category-card {
+            background: #272727;
+            border: 2px solid #ffd700;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+            margin: 0 8px 32px 8px;
+            padding: 24px 32px;
+            min-width: 260px;
+            max-width: 340px;
+            cursor: pointer;
+            transition: box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .category-card:hover {
+            transform: translateY(-4px) scale(1.04);
+            box-shadow: 0 8px 32px #ffd70044;
+        }
+        .category-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 12px;
+            color: #fff;
+        }
+        .skills-list {
+            display: none;
+            width: 100%;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 18px;
+            margin-top: 10px;
+        }
+        .skills-list.active {
+            display: grid;
+        }
+        .skill-card {
+            background: #f7f7f7;
+            border-radius: 10px;
+            padding: 24px 16px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            margin-bottom: 0;
+            min-width: 100px;
+            max-width: 120px;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: box-shadow 0.2s, transform 0.2s;
+        }
+        .skill-card:hover {
+            transform: scale(1.06);
+        }
+        .skill-card img {
+            width: 70px;
+            height: 70px;
+            object-fit: contain;
+            margin-bottom: 12px;
+        }
+        .skill-name {
+            font-size: 1em;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <ul>
+                <li><a href="/" class="nav-btn">Home</a></li>
+                <li><a href="/about/" class="nav-btn">About Me</a></li>
+                <li><a href="/skills/" class="nav-btn active">Skills</a></li>
+                <li><a href="/certificates/" class="nav-btn">Certificates</a></li>
+                <li><a href="/projects/" class="nav-btn">Projects</a></li>
+                <li><a href="/contact/" class="nav-btn">Contact Me</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="skills-layout">
+        <h1 class="skills-title typewriter" id="skills-typewriter-title"></h1>
+        <div id="categories-containerID" class="categories-container">
+            {% for category in skills %}
+            <div class="category-card" id="category-{{ forloop.counter }}" onclick="toggleSkills('skills-{{ forloop.counter }}')">
+                <div class="category-title">{{ category.category }}</div>
+                <div id="skills-{{ forloop.counter }}" class="skills-list">
+                    {% for skill in category.skills %}
+                    <div class="skill-card">
+                        <img src="{{ skill.image }}" alt="{{ skill.name }}" class="skill-img">
+                        <span class="skill-name">{{ skill.name }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% if messages %}
+            {% for message in messages %}
+                <div>{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    </main>
+    <footer>
+        <p>&copy; 2025 Avignan Nag</p>
+    </footer>
+    <script>
+    function toggleSkills(id) {
+        var lists = document.querySelectorAll('.skills-list');
+        var el = document.getElementById(id);
+        var isActive = el.classList.contains('active');
+        lists.forEach(function(list) {
+            list.classList.remove('active');
+        });
+        if (!isActive) {
+            el.classList.add('active');
+        }
+    }
+    </script>
+    <script src="/static/javascript.js"></script>
+    <script>
+    // Smooth page transition effect
+    document.querySelectorAll('.nav-btn').forEach(function(link) {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.body.style.transition = 'opacity 0.5s';
+            document.body.style.opacity = '0';
+            setTimeout(function() {
+                window.location = link.href;
+            }, 500);
+        });
+    });
+    </script>
+</body>
+</html>

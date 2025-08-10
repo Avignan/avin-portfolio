@@ -1,0 +1,40 @@
+services:
+  django:
+    build: ./django_app
+    container_name: portfolio_django
+    volumes:
+      - ./django_app:/app
+      - static_volume:/app/staticfiles
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    depends_on:
+      - fastapi
+
+  
+  fastapi:
+    build: ./fastapi_app
+    container_name: portfolio_fastapi
+    volumes:
+      - ./fastapi_app:/app
+    ports:
+      - "8001:8001"
+    env_file:
+      - .env
+  
+
+  nginx:
+    build: ./nginx
+    container_name: portfolio_nginx
+    ports:
+      - "80:80"
+    volumes:
+      - static_volume:/var/www/static
+    depends_on:
+      - django
+      - fastapi
+
+
+volumes:
+  static_volume:

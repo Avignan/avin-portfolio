@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Projects - Portfolio</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <style>
+        .categories-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 32px;
+            justify-content: center;
+            margin-top: 32px;
+        }
+        .project-card {
+            background: #272727;
+            border: 2px solid #ffd700;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+            margin: 0 8px 32px 8px;
+            padding: 24px 32px;
+            min-width: 260px;
+            max-width: 340px;
+            cursor: pointer;
+            transition: box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .project-card:hover {
+            transform: translateY(-4px) scale(1.04);
+            box-shadow: 0 8px 32px #ffd70044;
+        }
+        .project-name {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 12px;
+            color: #fff;
+        }
+        .projects-list {
+            display: none;
+            width: 100%;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 18px;
+            margin-top: 10px;
+        }
+        .projects-list.active {
+            display: grid;
+        }
+        .project-card:hover {
+            transform: scale(1.06);
+        }
+        .project-name {
+            font-size: 1em;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <ul>
+                <li><a href="/" class="nav-btn">Home</a></li>
+                <li><a href="/about/" class="nav-btn">About Me</a></li>
+                <li><a href="/skills/" class="nav-btn active">Skills</a></li>
+                <li><a href="/certificates/" class="nav-btn">Certificates</a></li>
+                <li><a href="/projects/" class="nav-btn">Projects</a></li>
+                <li><a href="/contact/" class="nav-btn">Contact Me</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="projects-layout">
+        <h1 class="typewriter" id="projects-typewriter-title" style="color:#ffd700; margin-bottom:24px; text-align:left; letter-spacing:2px; position:absolute; top:40px; left:40px; z-index:2; font-family:'Libertinus Sans', Arial, sans-serif; white-space:nowrap; overflow:hidden; border-right:2px solid #ffd700;"></h1>
+        <div id="categories-containerID" class="categories-container">
+            {% for project in projects %}
+                <div class="project-card" onclick="toggleProjectDesc('project-details-{{ forloop.counter }}')">
+                    <span class="project-name">{{ project.name }}</span>
+                    <div id="project-details-{{ forloop.counter }}" class="project-details" style="display:none; margin-top:10px; color:#ffd700; font-size:1em;">
+                        <div class="project-desc" style="margin-bottom:8px; color:#ffd700;">{{ project.desc }}</div>
+                        {% if project.components %}
+                        <div class="project-components">
+                            <span style="color:#fff; font-weight:500;">Components:</span>
+                            <ul style="margin:8px 0 0 16px; color:#ffd700; list-style:none; padding-left:0; text-align:left;">
+                                {% for comp in project.components %}
+                                <li style="margin-bottom:4px; color:#ffd700; text-align:left; padding-left:0;">{{ comp }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        {% if messages %}
+            {% for message in messages %}
+                <div>{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    </main>
+    <footer>
+        <p>&copy; 2025 Avignan Nag</p>
+    </footer>
+    <script>
+    function toggleProjectDesc(id) {
+        var el = document.getElementById(id);
+        if (el.style.display === "none") {
+            el.style.display = "block";
+        } else {
+            el.style.display = "none";
+        }
+    }
+    </script>
+    <script>
+    // Smooth page transition effect
+    document.querySelectorAll('.nav-btn').forEach(function(link) {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.body.style.transition = 'opacity 0.5s';
+            document.body.style.opacity = '0';
+            setTimeout(function() {
+                window.location = link.href;
+            }, 500);
+        });
+    });
+    </script>
+    <script src="/static/javascript.js"></script>
+</body>
+</html>

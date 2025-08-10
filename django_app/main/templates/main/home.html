@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Portfolio Homepage</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <ul>
+                <li><a href="/" class="nav-btn">Home</a></li>
+                <li><a href="/about/" class="nav-btn">About Me</a></li>
+                <li><a href="/skills/" class="nav-btn">Skills</a></li>
+                <li><a href="/certificates/" class="nav-btn">Certificates</a></li>
+                <li><a href="/projects/" class="nav-btn">Projects</a></li>
+                <li><a href="/contact/" class="nav-btn">Contact Me</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="main-center">
+        <div>
+            <h1 class="center-title typewriter" id="typewriter-title"></h1>
+            <img src="https://res.cloudinary.com/dwfuiwdto/image/upload/v1754728229/Avin_knerub.jpg" alt="Avin" class="profile-img">
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2025 Avignan Nag</p>
+    </footer>
+    <script src="/static/javascript.js"></script>
+</footer>
+    <script>
+    // Smooth page transition effect
+    document.querySelectorAll('.nav-btn').forEach(function(link) {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.body.style.transition = 'opacity 0.5s';
+            document.body.style.opacity = '0';
+            setTimeout(function() {
+                window.location = link.href;
+            }, 500);
+        });
+    });
+    </script>
+</body>
+</html>
