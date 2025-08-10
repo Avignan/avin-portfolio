@@ -152,3 +152,4 @@ cloudinary.txt
 data/
 logs/
 staticfiles/
+".env.prod" 
